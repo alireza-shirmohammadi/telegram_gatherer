@@ -8,7 +8,7 @@ def elastic(message,i):
     dic['message']=message
     es.index(index='kafka',id=i, body=dic)
 
-    return print('done .')
+
 
 def search(q):
 

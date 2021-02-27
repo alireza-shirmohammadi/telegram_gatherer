@@ -4,7 +4,8 @@ from telethon.tl.types import InputMessagesFilterEmpty
 from telethon.tl.functions.messages import GetHistoryRequest
 import json
 from client_conf import conf
-
+from consumer import consum
+from search_channels import search_channel
 
 
 # Create the client and connect
@@ -44,4 +45,7 @@ class Messages():
 b=Messages()
 
 b.collect(input('address of channel:'),int(input('number of result:')))
+
+consum()
+search_channel()
 

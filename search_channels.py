@@ -1,3 +1,7 @@
 from connect_elastic import search
-q=input('search here :')
-search(q)
+def search_channel():
+    q=input('search here :')
+    try:
+        search(q)
+    except:
+        print('nothing found')
