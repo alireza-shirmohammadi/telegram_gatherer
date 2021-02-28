@@ -5,15 +5,23 @@ import json
 from client_conf import conf
 from consumer import consum
 from search_channels import search_channel
+import os
+from redis_conf import redis_cli,redis_get
 
 
 # Create the client and connect
+if not os.path.isfile('@lireza.session'):
+    api_id = input("enter your api_id : ")
+    api_hash = input("enter your api-hash : ")
+    client = conf(api_id, api_hash)
 
-api_id = input("enter your api_id : ")
-api_hash = input("enter your api-hash : ")
-client = conf(api_id, api_hash)
-
-
+#cached login information to avoid login frequently
+    redis_cli('api_id',api_id)
+    redis_cli('api_hash', api_hash)
+else:
+    api_id= redis_get('api_id')
+    api_hash=redis_get('api_hash')
+    client=conf(api_id,api_hash)
 class Messages:
     def collect(self, channel, limit):
         filter = InputMessagesFilterEmpty()
@@ -36,7 +44,7 @@ class Messages:
             a["message"] = result.messages[i].message
             binary = json.dumps(a).encode("utf-8")
             kafka_producer(binary)
-            print(result.messages[i].message)
+            #print(result.messages[i].message)
             i += 1
 
         return None

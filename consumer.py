@@ -45,3 +45,5 @@ def consum():
         consumer.close()
 
     #      Close down consumer to commit final offsets.
+
+

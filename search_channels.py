@@ -4,6 +4,12 @@ from connect_elastic import search
 def search_channel():
     q = input("search here :")
     try:
-        search(q)
+        result=search(q)
+        if result is None:
+            print('nothing found !')
+
+
     except:
-        print("nothing found")
+        print("something bad happend!!!")
+
+

@@ -16,9 +16,11 @@ def search(q):
     m = es.search(index="kafka", body=body)
     # len of search :
     size = len(m["hits"]["hits"])
-
+    #print(es.get(index='kafka',id=5))
     i = 0
     for i in range(0, size):
 
-        print(m["hits"]["hits"][i]["_source"]["message"])
+        print('id = ',m["hits"]["hits"][i]["_id"],'\n',m["hits"]["hits"][i]["_source"]["message"])
         i += 1
+    if size!=0:
+        return 1
