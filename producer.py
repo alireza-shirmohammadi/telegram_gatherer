@@ -6,9 +6,8 @@ conf = {
     "client.id": socket.gethostname(),
 }
 
+
 def kafka_producer(dict):
     producer = Producer(conf)
-    producer.produce('telegram', value=dict)
+    producer.produce("telegram", value=dict)
     producer.flush()
-
-

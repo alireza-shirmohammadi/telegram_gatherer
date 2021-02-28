@@ -13,6 +13,7 @@ conf = {
 
 consumer = Consumer(conf)
 
+
 def consum():
     i = 0
     try:
@@ -34,16 +35,13 @@ def consum():
                     raise KafkaException(msg.error())
 
             else:
-                message = (msg.value())
-                my_json = json.loads(message.decode('utf-8'))
-                elastic(my_json['message'],i)
-                i+=1
-
-
-
+                message = msg.value()
+                my_json = json.loads(message.decode("utf-8"))
+                elastic(my_json["message"], i)
+                i += 1
 
     finally:
-         print('end',i)
-         consumer.close()
+        print("end", i)
+        consumer.close()
 
-    #     # Close down consumer to commit final offsets.
+    #      Close down consumer to commit final offsets.
